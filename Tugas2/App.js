@@ -1,96 +1,109 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import SignUp from './View/SignUp';
+import SignIn from './View/SignIn';
+import ResetPassword from './View/ResetPassword';
+import {View, Text, TouchableOpacity} from 'react-native';
+import Ionicons from 'react-native-vector-icons/FontAwesome';
+import Home from './View/Home/Home';
 
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  TextInput,
-  onChangeText,
-  text,
-  Button,
-  Image,
-  Alert,
-  Touchable,
-  TouchableOpacity,
-  Modal,
-  width,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {styles} from './style';
-import React, {useState} from 'react';
-
-const App: () => Node = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+function MyTabBar({state, descriptors, navigation}) {
   return (
-    <View style={styles.Container}>
-      <Image
-        source={require('./Image/Group443.png')}
-        style={{
-          width: 190,
-          height: 44,
-          margin: 20,
-          alignSelf: 'center',
-        }}></Image>
-      <Text style={styles.txtTitleSign}>Creat an account</Text>
-      <TextInput
-        style={styles.inputEmail}
-        placeholder="Name"
-        placeholderTextColor="#959595"
-        onChangeText={text => setName(text)}
-      />
-      <TextInput
-        style={styles.inputSandi}
-        placeholder="Email"
-        placeholderTextColor="#959595"
-        onChangeText={text => setEmail(text)}
-      />
-      <TextInput
-        style={styles.inputEmail}
-        placeholder="Phone"
-        placeholderTextColor="#959595"
-        onChangeText={text => setPhone(text)}
-      />
-      <TextInput
-        style={styles.inputSandi}
-        placeholder="Password"
-        secureTextEntry={true}
-        placeholderTextColor="#959595"
-        onChangeText={text => setPassword(text)}
-      />
+    <View style={{flexDirection: 'row'}}>
+      {state.routes.map((route, index) => {
+        const {options} = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.name;
 
-      <TouchableOpacity style={styles.btnLogin}>
-        <Text style={styles.textLogin}>Sign Up</Text>
-      </TouchableOpacity>
+        const isFocused = state.index === index;
 
-      <View style={styles.ContainerSignUp}>
-        <Text style={styles.textDHA}>Already have account?</Text>
-        <TouchableOpacity style={styles.btnTextSignup}>
-          <Text style={styles.textSignup}> Login</Text>
-        </TouchableOpacity>
-      </View>
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            // The `merge: true` option makes sure that the params inside the tab screen are preserved
+            navigation.navigate({name: route.name, merge: true});
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        const iconsName =
+          label === 'SignIn' ? 'home' : label === 'Signup' ? 'user' : 'heart';
+
+        return (
+          <TouchableOpacity
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{flex: 1, alignItems: 'center'}}>
+            <Ionicons name={iconsName} size={20} color={'red'} />
+            <Text style={{color: isFocused ? '#673ab7' : '#222'}}>{label}</Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
-};
+}
+const Tab = createBottomTabNavigator();
 
-export default App;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        tabBar={props => <MyTabBar {...props} />}
+        // options={({route}) => ({
+        //   tabBarIcon: ({focused, size, color}) => {
+        //     let iconsName;
+        //     if (route.name === 'SignIn') {
+        //       iconsName = focused ? 'ios-home' : 'ios-home-outline';
+        //       size = focused ? size + 8 : size + 5;
+        //     } else if (route.name === 'SignUp') {
+        //       iconsName = focused ? 'ios-home' : 'ios-home-outline';
+        //       size = focused ? size + 8 : size + 5;
+        //     }
+        //     return <Ionicons name={iconsName} size={size} color={color} />;
+        //   },
+        // })}
+        // tabBarOptions={{
+        //   activeTintColor: 'black',
+        //   inactiveTintColor: 'black',
+        //   showLabel: false,
+        //   style: {
+        //     backgroudColor: '#ffc125',
+        //     heigt: 60,
+        //   },
+        // }}
+      >
+        <Tab.Screen
+          name="SignIn"
+          component={SignIn}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{headerShown: false}}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}

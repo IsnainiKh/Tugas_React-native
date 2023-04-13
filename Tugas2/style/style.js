@@ -7,6 +7,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  BoxLogo: {
+    width: '100%',
+    height: 35,
+    backgroundColor: 'aqua',
+    alignSelf: 'flex-start',
+    position: 'absolute',
+    top: 0,
+  },
+  BoxBanner: {
+    flexDirection: 'row',
+    width: '100%',
+    position: 'absolute',
+  },
 
   txtTitleSign: {
     fontSize: 18,
@@ -18,7 +31,6 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     color: '#2e3283',
     marginHorizontal: 10,
-    
   },
   inputEmail: {
     height: 43,
@@ -52,6 +64,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  btnResetPassword: {
+    height: 43,
+    width: 273,
+    backgroundColor: '#2e3283',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textResetPassword: {
+    fontSize: 12,
+    color: 'white',
+  },
   textBtnForgotPw: {
     fontSize: 11,
     color: '#2E3283',
@@ -62,10 +86,10 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
   },
-  LineView:{
-    backgroundColor:'#959595',
-    width:95,
-    height:2,
+  LineView: {
+    backgroundColor: '#959595',
+    width: 95,
+    height: 2,
     alignItems: 'center',
   },
 
@@ -77,32 +101,29 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     //padding: 20
   },
-  textVersion:{
+  textVersion: {
     marginTop: 10,
-    alignSelf: "center"
+    alignSelf: 'center',
   },
-  ContainerSignUp:{
+  ContainerSignUp: {
     width: '100%',
     height: 35,
     backgroundColor: '#ffff',
-    position:'absolute',
+    position: 'absolute',
     bottom: 0,
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: "row",
+    flexDirection: 'row',
   },
-  textDHA:{
-    fontSize:14,
+  textDHA: {
+    fontSize: 14,
     color: '#5b5b5b',
-    
   },
-  btnTextSignup:{
-    
-  },
-  textSignup:{
+  btnTextSignup: {},
+  textSignup: {
     fontWeight: 'bold',
-    fontSize:14,
+    fontSize: 14,
     color: '#5b5b5b',
-    justifyContent:'center',
-  }
+    justifyContent: 'center',
+  },
 });

@@ -5,9 +5,7 @@
  * @format
  * @flow strict-local
  */
-
-
-import type {Node} from 'react';
+import * as react from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -35,18 +33,18 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {styles} from './style';
+import {styles} from '../style/style';
 import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
 
-
-const App: () => Node = () => {
-  
+export default function SignIn() {
+  const navigation = useNavigation();
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.Container}>
       <Image
-        source={require('./Image/Group443.png')}
+        source={require('../Image/Group443.png')}
         style={{
           width: 190,
           height: 44,
@@ -58,7 +56,6 @@ const App: () => Node = () => {
         style={styles.inputEmail}
         placeholder="Username"
         placeholderTextColor="#959595"
-        
         onChangeText={text => setUsername(text)}
       />
       <TextInput
@@ -85,7 +82,7 @@ const App: () => Node = () => {
 
       <View style={styles.ContainerimageRow}>
         <Image
-          source={require('./Image/Image6.png')}
+          source={require('../Image/Image6.png')}
           style={{
             width: 55,
             height: 55,
@@ -93,7 +90,7 @@ const App: () => Node = () => {
           }}></Image>
 
         <Image
-          source={require('./Image/Group493.png')}
+          source={require('../Image/Group493.png')}
           style={{
             width: 55,
             height: 55,
@@ -105,12 +102,12 @@ const App: () => Node = () => {
 
       <View style={styles.ContainerSignUp}>
         <Text style={styles.textDHA}>Don't have account?</Text>
-        <TouchableOpacity style={styles.btnTextSignup}>
+        <TouchableOpacity
+          style={styles.btnTextSignup}
+          onPress={() => navigation.navigate('SignUp')}>
           <Text style={styles.textSignup}> Sign Up</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-};
-
-export default App;
+}
