@@ -20,6 +20,9 @@ export const styles = StyleSheet.create({
     width: '100%',
     position: 'absolute',
   },
+  containerBoxLogo1:{
+    flexDirection: "row"
+  },
 
   txtTitleSign: {
     fontSize: 18,

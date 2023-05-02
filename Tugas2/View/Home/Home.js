@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+import * as react from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -32,23 +40,27 @@ import {useNavigation} from '@react-navigation/native';
 export default function Home() {
   return (
     <View style={styles.Container}>
-      <View style={styles.BoxLogo}>
-        <Image
-          source={require('../../Image/Group443.png')}
-          style={{
-            alignSelf: 'flex-start',
-            width: '35',
-            position: 'absolute',
-          }}></Image>
-      </View>
       <Image
         source={require('../../Image/Banner.png')}
         style={{
-          alignSelf: 'flex-start',
           width: '100%',
+          top: 0,
           position: 'absolute',
-          top: 35,
         }}></Image>
+     
+
+      <View style={styles.ContainerBoxMenu1}>
+      <Image
+        source={require('../../Image/ic_ferry_domestic.png')}
+        style={{
+          alignSelf:'center'
+        }}></Image>
+        <Image
+        source={require('../../Image/ic_ferry_domestic.png')}
+        style={{
+         
+        }}></Image>
+      </View>
     </View>
   );
 }

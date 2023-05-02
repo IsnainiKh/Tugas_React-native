@@ -1,12 +1,15 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import SignUp from './View/SignUp';
-import SignIn from './View/SignIn';
-import ResetPassword from './View/ResetPassword';
+// import SignUp from './View/SignUp';
+// import SignIn from './View/SignIn';
+import DatePicker from './DatePicker';
 import {View, Text, TouchableOpacity} from 'react-native';
-import Ionicons from 'react-native-vector-icons/FontAwesome';
-import Home from './View/Home/Home';
+import Ionicons from 'react-native-vector-icons/AntDesign';
+import NetInfor from './NetInfor';
+import Geolocation from './geolocation';
+import ClipBoard from './ClipBoard';
+// import Home from './View/Home/Home';
 
 function MyTabBar({state, descriptors, navigation}) {
   return (
@@ -43,7 +46,7 @@ function MyTabBar({state, descriptors, navigation}) {
         };
 
         const iconsName =
-          label === 'SignIn' ? 'home' : label === 'Signup' ? 'user' : 'heart';
+          label === 'DatePicker' ? 'home' : 'heart';
 
         return (
           <TouchableOpacity
@@ -65,27 +68,30 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator
         tabBar={props => <MyTabBar {...props} />}
+        
       >
         <Tab.Screen
-          name="SignIn"
-          component={SignIn}
+          name="DatePicker"
+          component={DatePicker}
+          options={{headerShown: false}}
+        />
+         <Tab.Screen
+          name="NetInfor"
+          component={NetInfor}
           options={{headerShown: false}}
         />
         <Tab.Screen
-          name="SignUp"
-          component={SignUp}
+          name="Progres Indicator"
+          component={Geolocation}
           options={{headerShown: false}}
         />
-        <Tab.Screen
-          name="ResetPassword"
-          component={ResetPassword}
+         <Tab.Screen
+          name="Clipboard"
+          component={ClipBoard}
           options={{headerShown: false}}
         />
-        <Tab.Screen
-          name="Home"
-          component={Home}
-          options={{headerShown: false}}
-        />
+
+       
       </Tab.Navigator>
     </NavigationContainer>
   );
